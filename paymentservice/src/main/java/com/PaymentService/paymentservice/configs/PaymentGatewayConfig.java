@@ -3,6 +3,7 @@ package com.PaymentService.paymentservice.configs;
 import com.razorpay.RazorpayClient;
 import com.razorpay.RazorpayException;
 import com.stripe.Stripe;
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,8 +23,8 @@ public class PaymentGatewayConfig {
         return new RazorpayClient(razorpayId, razorpaySecret);
     }
 
-    @Bean
-    public void stripeClient() {
+    @PostConstruct
+    public void initializeStripe() {
         Stripe.apiKey = stripeSecretKey;
     }
 }
